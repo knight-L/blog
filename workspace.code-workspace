@@ -1,0 +1,14 @@
+{
+  "folders": [
+	{
+		"path": "."
+	},
+	{
+		"path": "..\\..\\nodeJs\\nodeblog"
+	},
+	{
+		"path": "..\\..\\nodeJs\\zhihu-api"
+	}
+],
+  "settings": {}
+}
