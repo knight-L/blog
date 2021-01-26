@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2020-12-25 21:07:42
  * @LastEditors: Knight
- * @LastEditTime: 2021-01-18 20:25:39
+ * @LastEditTime: 2021-01-25 21:31:38
  */
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '@/views/layout/Index.vue'
@@ -17,10 +17,6 @@ const routes: Array<RouteRecordRaw> = [
     children:[
         {
             path: '/',
-            redirect:'/home'
-        },
-        {
-            path: 'home',
             name: 'Home',
             component: () => import(/* webpackChunkName: "home" */ '../views/home/Index.vue')
         },
@@ -33,6 +29,11 @@ const routes: Array<RouteRecordRaw> = [
             path: 'about',
             name: 'About',
             component: () => import(/* webpackChunkName: "about" */ '../views/about/Index.vue')
+        },
+        {
+            path: 'test',
+            name: 'Test',
+            component: () => import(/* webpackChunkName: "test" */ '../views/test/Index.vue')
         }
     ]
   }

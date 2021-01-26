@@ -4,15 +4,18 @@
  * @Author: Knight
  * @Date: 2020-12-25 22:42:21
  * @LastEditors: Knight
- * @LastEditTime: 2020-12-27 21:03:37
+ * @LastEditTime: 2021-01-26 22:17:02
 -->
 <template>
-  <div class="layout">
-    <Hander></Hander>
-    <main>
-      <router-view />
-    </main>
-    <Footer></Footer>
+  <div class="h-screen overflow-y-scroll"
+       @scroll.passive="onScroll($event)">
+    <div class="relative min-h-screen pb-24">
+      <Hander v-if="navbarSticky"></Hander>
+      <main>
+        <router-view />
+      </main>
+      <Footer></Footer>
+    </div>
   </div>
 </template>
 
@@ -27,10 +30,19 @@ import Footer from "./components/footer/Index.vue";
     Footer,
   },
 })
-export default class Layout extends Vue {}
+export default class Layout extends Vue {
+  private navbarSticky = false;
+
+  private onScroll(ev: Event): void {
+    const scrollTop = (ev.target as HTMLElement).scrollTop; // 滚动条偏移量
+    // console.log("滚动条偏移量", scrollTop);
+    if (scrollTop > 100) {
+      this.navbarSticky = true;
+    } else {
+      this.navbarSticky = false;
+    }
+  }
+}
 </script>
 <style lang="scss" scoped>
-.layout {
-  position: relative;
-}
 </style>

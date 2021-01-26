@@ -1,8 +1,16 @@
 {
-  "folders": [
-	{
-		"path": "."
-	}
-],
-  "settings": {}
+    "folders": [
+        {
+            "path": "."
+        },
+        {
+            "path": "..\\..\\nodeJs"
+        },
+        {
+            "path": "..\\..\\Vue\\vue-antd-admin"
+        }
+    ],
+    "settings": {
+        "liveServer.settings.multiRootWorkspaceName": "blog"
+    }
 }
