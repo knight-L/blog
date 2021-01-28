@@ -4,15 +4,24 @@
  * @Author: Knight
  * @Date: 2020-12-25 22:42:21
  * @LastEditors: Knight
- * @LastEditTime: 2021-01-26 22:17:02
+ * @LastEditTime: 2021-01-27 23:20:17
 -->
 <template>
   <div class="h-screen overflow-y-scroll"
        @scroll.passive="onScroll($event)">
     <div class="relative min-h-screen pb-24">
+
       <Hander v-if="navbarSticky"></Hander>
+
+      <e-nav></e-nav>
+
       <main>
-        <router-view />
+        <router-view v-slot="{ Component }">
+          <transition name="main"
+                      mode="out-in">
+            <component :is="Component" />
+          </transition>
+        </router-view>
       </main>
       <Footer></Footer>
     </div>
@@ -22,11 +31,13 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import Hander from "./components/handler/Index.vue";
+import ENav from "./components/e-nav/Index.vue";
 import Footer from "./components/footer/Index.vue";
 
 @Options({
   components: {
     Hander,
+    ENav,
     Footer,
   },
 })
@@ -45,4 +56,14 @@ export default class Layout extends Vue {
 }
 </script>
 <style lang="scss" scoped>
+.main-enter,
+.main-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.main-enter-active,
+.main-leave-active {
+  transition: all 0.3s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+}
 </style>

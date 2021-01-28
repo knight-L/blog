@@ -4,23 +4,17 @@
  * @Author: Knight
  * @Date: 2021-01-25 21:28:15
  * @LastEditors: Knight
- * @LastEditTime: 2021-01-27 01:08:22
+ * @LastEditTime: 2021-01-27 21:43:35
 -->
 <template>
-  <div class="grid grid-cols-3 gap-5 xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 xxl:grid-cols-3">
-    <!-- <div class="shadow-2xl h-32 w-32 font-medium bg-white rounded-md flex items-center justify-center overflow-hidden"
-         v-for="item in imageData"
-         :key="item">
-      <img class="h-32 w-32 object-cover"
-           :data-funlazy="item">
-    </div> -->
-    <div class="bg-white rounded-lg overflow-hidden shadow-xl"
+  <div class="grid grid-cols-3 gap-6 xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 xxl:grid-cols-3">
+    <div class="bg-white rounded-lg overflow-hidden shadow-xl cursor-pointer transform transition motion-reduce:transform-none hover:scale-105 duration-500 focus:outline-none"
          v-for="item in list"
          :key="item.id">
-      <img class="w-full object-cover"
+      <img class="w-full h-48 rounded-t-lg object-cover"
            :data-funlazy="item.img"
            alt="card-title-img">
-      <div class="p-6">
+      <div class="p-4">
         <!-- <h4 class="font-semibold text-lg">{{item.title}}</h4> -->
         <div class="text-gray-600 text-xs uppercase font-semibold tracking-wide">
           {{item.time}}
@@ -29,7 +23,7 @@
           <span class="text-gray-600 text-sm">{{item.title}}</span>
 
         </div>
-        <div class="mt-4">
+        <div class="mt-1">
           <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full mr-1"
                 v-for="tag in item.tags"
                 :key="tag.id"
@@ -124,13 +118,18 @@ export default class Card extends Vue {
   }
 
   mounted(): void {
-    FunLazy({ effect: "fadeIn" });
+    FunLazy({
+      effect: "fadeIn",
+      useErrorImagePlaceholder: true,
+      // strictLazyMode: true,
+    });
   }
 
   private getLiat(): any[] {
     const _date = new Date();
     const _list = [] as any[];
-    for (let i = 0; i < 50; i++) {
+    const _num = Math.ceil(Math.random() * 100) || 50;
+    for (let i = 0; i < _num; i++) {
       _list.push({
         id: i,
         img: this.imageData[Math.floor(Math.random() * this.imageData.length)],
@@ -144,7 +143,7 @@ export default class Card extends Vue {
 
   private randomTags(): any[] {
     const _list = [] as any[];
-    for (let i = 0; i < Math.floor(Math.random() * this.tags.length); i++) {
+    for (let i = 0; i < Math.ceil(Math.random() * this.tags.length); i++) {
       _list.push({
         id: i,
         name: this.tags[Math.floor(Math.random() * this.tags.length)],
