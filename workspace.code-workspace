@@ -4,10 +4,13 @@
             "path": "."
         },
         {
-            "path": "..\\..\\nodeJs"
+            "path": "..\\..\\Vue\\vue-antd-admin"
         },
         {
-            "path": "..\\..\\Vue\\vue-antd-admin"
+            "path": "..\\..\\nodeJs\\vue-koa2-blog\\server"
+        },
+        {
+            "path": "..\\..\\nodeJs\\zhihu-api"
         }
     ],
     "settings": {
