@@ -4,7 +4,7 @@
  * @Autor: Knight
  * @Date: 2020-12-20 18:56:05
  * @LastEditors: Knight
- * @LastEditTime: 2021-01-28 22:18:20
+ * @LastEditTime: 2021-01-29 14:04:22
  */
 const fs = require("fs");
 
@@ -20,11 +20,3 @@ module.exports = (app) => {
     }
   });
 };
-
-// router.get("/", (ctx, next) => {
-//   ctx.body = "Hello koa";
-// });
-
-// router.get("/news", (ctx, next) => {
-//   ctx.body = "新闻page";
-// });

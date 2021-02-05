@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-01-28 22:41:22
  * @LastEditors: Knight
- * @LastEditTime: 2021-01-28 23:11:26
+ * @LastEditTime: 2021-01-30 15:44:28
  */
 // module.exports = {
 //   connectionStr: "mongodb://localhost:27017/ear-blog", //数据库连接字符串
@@ -19,8 +19,8 @@ const config = {
     name: "EAR",
   },
   jwt: {
-    secret: "secret",
-    exprisesIn: "3600s", //以秒为单位
+    secret: "knight_ear",
+    expiresIn: "7d", //以秒为单位60，"2 days"，"10h"，"7d"
   },
   mongodb: {
     host: "127.0.0.1",

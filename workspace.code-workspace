@@ -11,6 +11,9 @@
         },
         {
             "path": "..\\..\\nodeJs\\zhihu-api"
+        },
+        {
+            "path": "..\\..\\nodeJs\\koa-blog"
         }
     ],
     "settings": {
