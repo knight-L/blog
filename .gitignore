@@ -1,4 +1,5 @@
 blog-serve/package-lock.json
 
 # dependencies
-/node_modules
+/blog-serve/node_modules
+/blog-home/node_modules
