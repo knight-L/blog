@@ -4,14 +4,14 @@
  * @Author: Knight
  * @Date: 2021-01-30 15:42:10
  * @LastEditors: Knight
- * @LastEditTime: 2021-01-30 15:45:38
+ * @LastEditTime: 2021-02-06 22:09:52
  */
 const jwt = require("jsonwebtoken");
 const config = require("../config");
 
 const auth = async (ctx, next) => {
-  const { authorization = "" } = ctx.request.header;
-  const token = authorization.replace("Bearer ", "");
+  const { Authorization = "" } = ctx.request.header;
+  const token = Authorization.replace("Bearer ", "");
   try {
     const user = jwt.verify(token, config.jwt.secret);
     ctx.state.user = user;

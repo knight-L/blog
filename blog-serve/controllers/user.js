@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-01-28 23:28:20
  * @LastEditors: Knight
- * @LastEditTime: 2021-02-05 11:23:01
+ * @LastEditTime: 2021-02-06 22:49:00
  */
 const User = require("../schemas/user");
 const jwt = require("jsonwebtoken");
