@@ -4,10 +4,13 @@
  * @Author: Knight
  * @Date: 2021-01-30 21:19:07
  * @LastEditors: Knight
- * @LastEditTime: 2021-01-31 18:52:10
+ * @LastEditTime: 2021-02-06 21:57:08
  */
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import Layout from '../views/layout/Layout.vue';
+import NProgress from "nprogress"; // Progress 进度条
+import "nprogress/nprogress.css"; // Progress 进度条样式
+import store from "../store/index";
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -52,5 +55,30 @@ const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
     routes
 })
+
+NProgress.inc(0.2);
+NProgress.configure({
+    easing: "ease",
+    speed: 500,
+    showSpinner: false,
+});
+
+/**
+ * @description: 路由前置守卫
+ * @param {*} async
+ * @param {*} from
+ * @param {*} next
+ * @return {*}
+ * @author: Knight
+ */
+router.beforeEach((to, from, next) => {
+    NProgress.start();
+    if (to.name !== 'Login' && !store.state.token) next({ name: 'Login' });
+    else next();
+});
+
+router.afterEach(() => {
+    NProgress.done();
+});
 
 export default router

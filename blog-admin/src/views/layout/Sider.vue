@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-01-31 18:08:45
  * @LastEditors: Knight
- * @LastEditTime: 2021-02-05 11:01:35
+ * @LastEditTime: 2021-02-06 22:51:27
 -->
 <template>
   <a-layout-sider :collapsed="collapsed"
@@ -22,8 +22,10 @@
             :selectedKeys="selectedKeys"
             @select="menuSelect($event.selectedKeys)">
       <a-menu-item key="1">
-        <DashboardOutlined />
-        <span>Dashboard</span>
+        <router-link to="/">
+          <DashboardOutlined />
+          <span>Dashboard</span>
+        </router-link>
       </a-menu-item>
       <a-menu-item key="2">
         <router-link to="/articles">

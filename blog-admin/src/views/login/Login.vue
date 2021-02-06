@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-01-31 18:37:03
  * @LastEditors: Knight
- * @LastEditTime: 2021-02-03 21:51:21
+ * @LastEditTime: 2021-02-06 21:37:06
 -->
 <template>
   <div class="login">
@@ -29,48 +29,35 @@
         <div class="container">
           <div class="form">
             <h2>登录</h2>
-            <a-form :label-col="labelCol"
-                    :wrapper-col="wrapperCol">
-              <a-form-item label="Activity name">
-                <a-input v-model="modelRef.username"
-                         @blur="validate('name', { trigger: 'blur' }).catch(() => {})" />
+            <a-form :wrapper-col="{ span: 24 }"
+                    :model="loginform"
+                    :rules="formRules"
+                    ref="formRef">
+              <a-form-item name="username">
+                <a-input v-model:value="loginform.username"
+                         placeholder="账号"
+                         size="large">
+                  <template #prefix>
+                    <UserOutlined style="color:rgba(0,0,0,.25)" />
+                  </template>
+                </a-input>
               </a-form-item>
-              <a-form-item label="Activity zone">
-                <a-input v-model="modelRef.password"
-                         @blur="validate('name', { trigger: 'blur' }).catch(() => {})" />
+              <a-form-item name="password">
+                <a-input v-model:value="loginform.password"
+                         placeholder="密码"
+                         size="large">
+                  <template #prefix>
+                    <LockOutlined style="color:rgba(0,0,0,.25)" />
+                  </template>
+                </a-input>
               </a-form-item>
-              <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
+              <a-form-item>
                 <a-button block
-                          shape="round"
                           size="large"
                           :loading="loading"
                           @click="logIn()">登录</a-button>
               </a-form-item>
             </a-form>
-            <!-- <form>
-              <div class="inputBox">
-                <input type="text"
-                       placeholder="姓名">
-              </div>
-              <div class="inputBox">
-                <input type="password"
-                       placeholder="密码">
-
-              </div>
-              <div class="inputBox">
-                <a-button block
-                          shape="round"
-                          size="large"
-                          :loading="loading"
-                          @click="logIn()">登录</a-button>
-              </div>
-              <p class="forget">忘记密码?<a href="#">
-                  点击这里
-                </a></p>
-              <p class="forget">没有账户?<a href="#">
-                  注册
-                </a></p>
-            </form> -->
           </div>
         </div>
       </div>
@@ -81,28 +68,61 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import { login } from "../../api/user/user";
+import { UserOutlined, LockOutlined } from "@ant-design/icons-vue";
+import store from "../../store/index";
+import router from "../../router/index";
 
 @Options({
-  components: {},
+  components: {
+    UserOutlined,
+    LockOutlined,
+  },
 })
 export default class Login extends Vue {
   private loading = false;
-  private labelCol = { span: 4 };
-  private wrapperCol = { span: 14 };
-  private modelRef = {
-    username: String,
-    password: String,
+  private loginform = {
+    username: "",
+    password: "",
   };
 
-  private async logIn(): Promise<void> {
-    try {
-      this.loading = true;
-      const { token } = await login({ username: "admin", password: "admin" });
-      console.log(token);
-    } catch (err) {
-    } finally {
-      this.loading = false;
-    }
+  private formRules = {
+    username: [
+      {
+        required: true,
+        message: "请输入账号",
+        trigger: "blur",
+      },
+    ],
+    password: [
+      {
+        required: true,
+        message: "请输入密码",
+        trigger: "blur",
+      },
+    ],
+  };
+
+  private logIn(): void {
+    (this.$refs["formRef"] as any)
+      .validate()
+      .then(
+        async (): Promise<void> => {
+          try {
+            this.loading = true;
+            const { token } = await login(this.loginform);
+            const _token = "Bearer " + token;
+            // 将用户token保存到vuex中
+            store.commit("setToken", _token);
+            router.push("/");
+          } catch (err) {
+          } finally {
+            this.loading = false;
+          }
+        }
+      )
+      .catch((error: Error) => {
+        console.log("error", error);
+      });
   }
 }
 </script>
@@ -281,44 +301,5 @@ section .color:nth-child(3) {
 
 .form h2:hover:before {
   width: 53px;
-}
-
-.form .inputBox {
-  width: 100%;
-  margin-top: 20px;
-}
-
-/* 输入框样式 */
-
-.form .inputBox input {
-  width: 100%;
-  padding: 10px 20px;
-  background: rgba(255, 255, 255, 0.2);
-  outline: none;
-  border: none;
-  border-radius: 30px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-right: 1px solid rgba(255, 255, 255, 0.2);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  font-size: 16px;
-  letter-spacing: 1px;
-  color: #fff;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-}
-
-.form .inputBox input::placeholder {
-  color: #fff;
-}
-
-.forget {
-  margin-top: 6px;
-  color: #fff;
-  letter-spacing: 1px;
-}
-
-.forget a {
-  color: #fff;
-  font-weight: 600;
-  text-decoration: none;
 }
 </style>

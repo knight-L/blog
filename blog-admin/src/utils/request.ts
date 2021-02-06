@@ -4,10 +4,12 @@
  * @Author: Knight
  * @Date: 2021-01-30 23:44:48
  * @LastEditors: Knight
- * @LastEditTime: 2021-01-31 17:09:54
+ * @LastEditTime: 2021-02-06 22:42:50
  */
 import axios from "axios";
 import { notification } from 'ant-design-vue';
+import store from "../store/index";
+import router from "../router/index";
 
 // 创建 axios 实例
 const request = axios.create({
@@ -25,6 +27,8 @@ const errorHandler = (error: { response: { status: number; }; message: string; }
                 break;
             case 401:
                 error.message = "未授权，请重新登录";
+                store.commit('clearToken', "");
+                router.replace("/login");
                 break;
             case 403:
                 error.message = "拒绝访问";
@@ -72,9 +76,9 @@ const errorHandler = (error: { response: { status: number; }; message: string; }
 // request interceptor
 request.interceptors.request.use((config) => {
     // 向请求头添加token
-    const token = localStorage.getItem('token');
+    const token = store.state.token;
     if (token) { // 判断是否存在token，如果存在的话，则每个http header都加上token
-        config.headers.Authorization = `Bearer ${token}`;
+        config.headers["Authorization"] = token;
     }
     return config;
 }, errorHandler);
