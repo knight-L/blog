@@ -4,21 +4,173 @@
  * @Author: Knight
  * @Date: 2021-01-31 18:50:01
  * @LastEditors: Knight
- * @LastEditTime: 2021-01-31 18:50:43
+ * @LastEditTime: 2021-02-10 19:02:29
 -->
 <template>
   <div>
+    <a-steps :current="current">
+      <a-step v-for="item in steps"
+              :key="item.title"
+              :title="item.title" />
+    </a-steps>
+    <div class="steps-content">
+      {{ steps[current].content }}
+    </div>
+    <div class="steps-action">
+      <a-button v-if="current < steps.length - 1"
+                type="primary"
+                @click="next">下一步</a-button>
+      <a-button v-if="current > 0"
+                style="margin-left: 8px"
+                @click="prev">上一步</a-button>
+    </div>
+
+    <a-form ref="formRef"
+            :model="formState"
+            :rules="rules"
+            :label-col="{ span: 4 }"
+            :wrapper-col="{ span: 14 }">
+      <a-form-item ref="name"
+                   label="Activity name"
+                   name="name">
+        <a-input v-model:value="formState.name" />
+      </a-form-item>
+      <a-form-item label="Activity zone"
+                   name="region">
+        <a-select v-model:value="formState.region"
+                  placeholder="please select your zone">
+          <a-select-option value="shanghai">Zone one</a-select-option>
+          <a-select-option value="beijing">Zone two</a-select-option>
+        </a-select>
+      </a-form-item>
+      <a-form-item label="Activity form"
+                   name="desc">
+        <a-textarea v-model:value="formState.desc" />
+      </a-form-item>
+      <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
+        <a-button type="primary"
+                  @click="onSubmit">Create</a-button>
+        <!-- <a-button style="margin-left: 10px"
+                  @click="resetForm">Reset</a-button> -->
+      </a-form-item>
+    </a-form>
 
   </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
+import { ref } from "vue";
+import { ValidateErrorEntity } from "ant-design-vue/es/form/interface";
+
+interface FormState {
+  name: string;
+  region: string | undefined;
+  delivery: boolean;
+  type: string[];
+  resource: string;
+  desc: string;
+}
 
 @Options({
   components: {},
 })
-export default class Articles extends Vue {}
+export default class Articles extends Vue {
+  private current = 0;
+  private formRef = ref();
+  private steps = [
+    {
+      title: "First",
+      content: "First-content",
+    },
+    {
+      title: "Second",
+      content: "Second-content",
+    },
+    {
+      title: "Last",
+      content: "Last-content",
+    },
+  ];
+
+  private formState = {
+    name: "",
+    region: undefined,
+    date1: undefined,
+    delivery: false,
+    type: [],
+    resource: "",
+    desc: "",
+  };
+
+  private rules = {
+    name: [
+      {
+        required: true,
+        message: "Please input Activity name",
+        trigger: "blur",
+      },
+      { min: 3, max: 5, message: "Length should be 3 to 5", trigger: "blur" },
+    ],
+    region: [
+      {
+        required: true,
+        message: "Please select Activity zone",
+        trigger: "change",
+      },
+    ],
+    date1: [
+      {
+        required: true,
+        message: "Please pick a date",
+        trigger: "change",
+        type: "object",
+      },
+    ],
+    type: [
+      {
+        type: "array",
+        required: true,
+        message: "Please select at least one activity type",
+        trigger: "change",
+      },
+    ],
+    resource: [
+      {
+        required: true,
+        message: "Please select activity resource",
+        trigger: "change",
+      },
+    ],
+    desc: [
+      {
+        required: true,
+        message: "Please input activity form",
+        trigger: "blur",
+      },
+    ],
+  };
+
+  private onSubmit() {
+    // console.log(this.formRef.$refs);
+    // this.formRef.value
+    //   .validate()
+    //   .then(() => {
+    //     console.log("values");
+    //   })
+    //   .catch((error: ValidateErrorEntity<FormState>) => {
+    //     console.log("error", error);
+    //   });
+  }
+
+  private next(): void {
+    this.current++;
+  }
+
+  private prev(): void {
+    this.current--;
+  }
+}
 </script>
 <style scoped lang="less">
 </style>

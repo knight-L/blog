@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-01-30 23:44:48
  * @LastEditors: Knight
- * @LastEditTime: 2021-02-06 22:42:50
+ * @LastEditTime: 2021-02-06 23:21:56
  */
 import axios from "axios";
 import { notification } from 'ant-design-vue';
@@ -27,7 +27,7 @@ const errorHandler = (error: { response: { status: number; }; message: string; }
                 break;
             case 401:
                 error.message = "未授权，请重新登录";
-                store.commit('clearToken', "");
+                store.commit('clearToken');
                 router.replace("/login");
                 break;
             case 403:

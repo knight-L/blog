@@ -1,9 +1,6 @@
 {
     "folders": [
         {
-            "path": "."
-        },
-        {
             "path": "..\\..\\Vue\\vue-antd-admin"
         },
         {
@@ -14,6 +11,9 @@
         },
         {
             "path": "..\\..\\nodeJs\\koa-blog"
+        },
+        {
+            "path": "."
         }
     ],
     "settings": {

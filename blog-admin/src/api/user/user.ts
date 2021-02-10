@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-01-31 00:12:47
  * @LastEditors: Knight
- * @LastEditTime: 2021-02-05 11:06:49
+ * @LastEditTime: 2021-02-06 23:17:33
  */
 import request from "@/utils/request";
 import { User, UserListQuery } from "./interface";
@@ -17,7 +17,7 @@ import { User, UserListQuery } from "./interface";
  */
 export function create(data: User): Promise<any> {
     return request({
-        url: "/user",
+        url: "/api/v1.0/user",
         method: "post",
         data: data
     });
@@ -31,7 +31,7 @@ export function create(data: User): Promise<any> {
  */
 export function getUser(query?: UserListQuery): Promise<any> {
     return request({
-        url: "/user",
+        url: "/api/v1.0/user",
         method: "get",
         params: query
     });
@@ -39,7 +39,7 @@ export function getUser(query?: UserListQuery): Promise<any> {
 
 export function login(data: User): Promise<any> {
     return request({
-        url: "/user/login",
+        url: "/api/v1.0/user/login",
         method: "post",
         data
     });

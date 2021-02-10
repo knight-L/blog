@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-01-30 21:19:07
  * @LastEditors: Knight
- * @LastEditTime: 2021-02-06 22:48:51
+ * @LastEditTime: 2021-02-06 23:21:42
  */
 import { createStore } from 'vuex';
 import modules from './modules';
@@ -18,7 +18,7 @@ export default createStore({
             state.token = token;
             localStorage.setItem("token", token);
         },
-        clearToken(state: { token: string }, token: string): void {
+        clearToken(state: { token: string }): void {
             state.token = '';
             localStorage.removeItem("token");
         },
