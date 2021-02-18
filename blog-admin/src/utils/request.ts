@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-01-30 23:44:48
  * @LastEditors: Knight
- * @LastEditTime: 2021-02-06 23:21:56
+ * @LastEditTime: 2021-02-18 13:39:06
  */
 import axios from "axios";
 import { notification } from 'ant-design-vue';
@@ -19,7 +19,7 @@ const request = axios.create({
 });
 
 // 异常拦截处理器
-const errorHandler = (error: { response: { status: number; }; message: string; }) => {
+const errorHandler = (error: { response: { status: number; data: { name: string; message: string; } }; message: string; }) => {
     if (error && error.response) {
         switch (error.response.status) {
             case 400:
@@ -67,8 +67,8 @@ const errorHandler = (error: { response: { status: number; }; message: string; }
         error.message = "连接到服务器失败";
     }
     notification.error({
-        message: "Error",
-        description: error.message,
+        message: error.response.data.name || "Error",
+        description: error.response.data.message || error.message,
     });
     return Promise.reject(error);
 };
