@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-01-31 18:37:03
  * @LastEditors: Knight
- * @LastEditTime: 2021-02-06 21:37:06
+ * @LastEditTime: 2021-02-18 13:39:44
 -->
 <template>
   <div class="login">
@@ -45,6 +45,7 @@
               <a-form-item name="password">
                 <a-input v-model:value="loginform.password"
                          placeholder="密码"
+                         type="password"
                          size="large">
                   <template #prefix>
                     <LockOutlined style="color:rgba(0,0,0,.25)" />
