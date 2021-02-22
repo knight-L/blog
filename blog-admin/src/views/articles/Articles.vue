@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-01-31 18:50:01
  * @LastEditors: Knight
- * @LastEditTime: 2021-02-10 19:02:29
+ * @LastEditTime: 2021-02-22 23:03:35
 -->
 <template>
   <div>
@@ -45,7 +45,8 @@
       </a-form-item>
       <a-form-item label="Activity form"
                    name="desc">
-        <a-textarea v-model:value="formState.desc" />
+        <TEditor ref="editor"
+                 v-model="formState.desc" />
       </a-form-item>
       <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
         <a-button type="primary"
@@ -62,6 +63,7 @@
 import { Options, Vue } from "vue-class-component";
 import { ref } from "vue";
 import { ValidateErrorEntity } from "ant-design-vue/es/form/interface";
+import TEditor from "../../components/TEditor.vue";
 
 interface FormState {
   name: string;
@@ -73,7 +75,9 @@ interface FormState {
 }
 
 @Options({
-  components: {},
+  components: {
+    TEditor,
+  },
 })
 export default class Articles extends Vue {
   private current = 0;
@@ -150,6 +154,8 @@ export default class Articles extends Vue {
       },
     ],
   };
+
+  //mounted(): void {}
 
   private onSubmit() {
     // console.log(this.formRef.$refs);
