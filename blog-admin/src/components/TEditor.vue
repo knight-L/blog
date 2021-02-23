@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-01-31 18:50:01
  * @LastEditors: Knight
- * @LastEditTime: 2021-02-22 23:25:45
+ * @LastEditTime: 2021-02-23 20:13:50
 -->
 <template>
   <div class="tinymce-box">
@@ -122,7 +122,8 @@ export default class TEditor extends Vue {
     // 此处为图片上传处理函数，这个直接用了base64的图片形式上传图片，
     // 如需ajax上传可参考https://www.tiny.cloud/docs/configure/file-image-upload/#images_upload_handler
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-    images_upload_handler: (blobInfo, success, failure) => {
+    images_upload_handler: (blobInfo: any, success: any, failure: any) => {
+      console.log(blobInfo, success, failure);
       const img = "data:image/jpeg;base64," + blobInfo.base64();
       success(img);
     },
@@ -137,7 +138,7 @@ export default class TEditor extends Vue {
 
   // 添加相关的事件，可用的事件参照文档=> https://github.com/tinymce/tinymce-vue => All available events
   // 需要什么事件可以自己增加
-  onClick(e): void {
+  onClick(e: any): void {
     this.$emit("onClick", e, tinymce);
   }
 

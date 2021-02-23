@@ -4,10 +4,10 @@
  * @Author: Knight
  * @Date: 2021-01-31 18:08:21
  * @LastEditors: Knight
- * @LastEditTime: 2021-02-06 20:04:41
+ * @LastEditTime: 2021-02-23 22:29:30
 -->
 <template>
-  <a-layout-header style="background: #fff; padding: 0">
+  <a-layout-header style="background: #fff; padding: 0;position:fixed;zIndex: 1;width:100%;">
     <menu-unfold-outlined v-if="collapsed"
                           class="trigger"
                           @click="$emit('toggleCollapse')" />

@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-01-31 18:09:01
  * @LastEditors: Knight
- * @LastEditTime: 2021-02-03 21:55:20
+ * @LastEditTime: 2021-02-23 22:35:08
 -->
 <template>
   <a-layout class="layout">
@@ -12,7 +12,7 @@
     <a-layout>
       <Header :collapsed="collapsed"
               @toggleCollapse="toggleCollapse()"></Header>
-      <a-layout-content :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px' }">
+      <a-layout-content :style="{ margin: '88px 16px 24px', padding: '24px', background: '#fff', minHeight: '280px',}">
         <router-view></router-view>
       </a-layout-content>
     </a-layout>
