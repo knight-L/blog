@@ -4,10 +4,10 @@
  * @Author: Knight
  * @Date: 2021-01-31 18:50:01
  * @LastEditors: Knight
- * @LastEditTime: 2021-02-22 23:03:35
+ * @LastEditTime: 2021-03-02 15:19:12
 -->
 <template>
-  <div>
+  <div style="background: rgb(255, 255, 255);padding: 24px;">
     <a-steps :current="current">
       <a-step v-for="item in steps"
               :key="item.title"

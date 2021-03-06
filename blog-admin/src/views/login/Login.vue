@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-01-31 18:37:03
  * @LastEditors: Knight
- * @LastEditTime: 2021-02-18 13:39:44
+ * @LastEditTime: 2021-03-06 21:08:40
 -->
 <template>
   <div class="login">
@@ -15,7 +15,7 @@
       <div class="color"></div>
       <div class="box">
         <!-- 背景圆 -->
-        <div class="circle"
+        <!-- <div class="circle"
              style="--x:0"></div>
         <div class="circle"
              style="--x:1"></div>
@@ -24,7 +24,7 @@
         <div class="circle"
              style="--x:3"></div>
         <div class="circle"
-             style="--x:4"></div>
+             style="--x:4"></div> -->
         <!-- 登录框 -->
         <div class="container">
           <div class="form">
@@ -146,7 +146,7 @@ section .color {
   /* 绝对定位 */
   position: absolute;
   /* 使用filter(滤镜) 属性，给图像设置高斯模糊*/
-  filter: blur(200px);
+  filter: blur(100px);
 }
 
 /* :nth-child(n) 选择器匹配父元素中的第 n 个子元素 */
