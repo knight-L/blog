@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2020-12-20 18:23:35
  * @LastEditors: Knight
- * @LastEditTime: 2021-01-31 01:16:18
+ * @LastEditTime: 2021-03-06 18:13:37
  */
 // 导入koa，和koa 1.x不同，在koa2中，我们导入的是一个class，因此用大写的Koa表示:
 const Koa = require("koa");
@@ -41,8 +41,9 @@ app.use(limiter);
 app.use(koaBody()); //post请求的参数转为json格式返回
 app.use(
   error({
-    postFormat: (err, { stack, ...rest }) =>
-      process.env.NODE_ENV === "production" ? rest : { stack, ...rest },
+    postFormat: (err, { stack, ...rest }) => {
+      return process.env.NODE_ENV === "production" ? rest : { stack, ...rest };
+    },
   })
 ); //异常和参数的处理
 
@@ -51,5 +52,7 @@ routing(app); //路由
 
 // 在端口3000监听:
 app.listen(config.app.port, config.app.host, () => {
-  console.log(`项目启动在${config.app.host}:${config.app.port}`);
+  console.log(
+    `${process.env.NODE_ENV}--项目启动在${config.app.host}:${config.app.port}`
+  );
 });
