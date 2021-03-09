@@ -4,14 +4,11 @@
  * @Author: Knight
  * @Date: 2021-01-28 23:28:20
  * @LastEditors: Knight
- * @LastEditTime: 2021-02-06 22:49:00
+ * @LastEditTime: 2021-03-09 22:09:05
  */
 const User = require("../schemas/user");
 const jwt = require("jsonwebtoken");
 const config = require("../config");
-const dayjs = require("dayjs");
-
-dayjs.locale("zh-cn");
 
 class UsersCtr {
   async find(ctx) {

@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-01-28 23:25:06
  * @LastEditors: Knight
- * @LastEditTime: 2021-02-04 22:22:42
+ * @LastEditTime: 2021-03-09 22:09:52
  */
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
@@ -55,6 +55,13 @@ const userSchema = new Schema(
     minimize: false, //Mongoose 将保存空对象
     timestamps: true, //默认制动生成创建时间和更新时间
     versionKey: false,
+    toJSON: {
+      transform: function (doc, ret, options) {
+        ret.createdAt = dayjs(doc.createdAt).format("YYYY-MM-DD HH:mm");
+        ret.updatedAt = dayjs(doc.updatedAt).format("YYYY-MM-DD HH:mm");
+        return ret;
+      },
+    },
   }
 ); //如果设置了 timestamps 选项, mongoose 会在你的 schema 自动添加 createdAt 和 updatedAt 字段， 其类型为 Date。
 
