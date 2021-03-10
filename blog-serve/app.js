@@ -4,13 +4,15 @@
  * @Author: Knight
  * @Date: 2020-12-20 18:23:35
  * @LastEditors: Knight
- * @LastEditTime: 2021-03-06 18:13:37
+ * @LastEditTime: 2021-03-10 22:21:04
  */
 // 导入koa，和koa 1.x不同，在koa2中，我们导入的是一个class，因此用大写的Koa表示:
 const Koa = require("koa");
 const mongoose = require("mongoose");
-const routing = require("./routers");
 const koaBody = require("koa-body");
+const path = require("path");
+const static = require("koa-static");
+const routing = require("./routers");
 const parameter = require("koa-parameter");
 const error = require("koa-json-error");
 const cors = require("koa2-cors");
@@ -37,8 +39,18 @@ const limiter = RateLimit.middleware({
   max: 100, // limit each IP to 100 requests per interval
 });
 
+// 配置静态资源路径
+app.use(static(path.join(__dirname, "public")));
 app.use(limiter);
-app.use(koaBody()); //post请求的参数转为json格式返回
+app.use(
+  koaBody({
+    multipart: true,
+    formidable: {
+      maxFieldsSize: 5 * 1024 * 1024, // 最大文件为5M
+      multipart: true, // 是否支持 multipart-formdate 的表单
+    },
+  })
+); //post请求的参数转为json格式返回
 app.use(
   error({
     postFormat: (err, { stack, ...rest }) => {

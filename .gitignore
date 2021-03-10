@@ -4,3 +4,5 @@ blog-serve/package-lock.json
 /blog-serve/node_modules
 /blog-home/node_modules
 /blog-admin/node_modules
+
+/blog-serve/public

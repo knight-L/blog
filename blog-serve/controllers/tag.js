@@ -4,14 +4,11 @@
  * @Author: Knight
  * @Date: 2021-01-28 23:33:12
  * @LastEditors: Knight
- * @LastEditTime: 2021-02-05 20:44:03
+ * @LastEditTime: 2021-03-10 22:15:23
  */
 const Tag = require("../schemas/tag");
 
 const config = require("../config");
-const dayjs = require("dayjs");
-
-dayjs.locale("zh-cn");
 
 class TagsCtr {
   async find(ctx) {
@@ -24,10 +21,6 @@ class TagsCtr {
       .sort({ createdAt: -1 }); //1：正序，-1：倒序
     const total = await Tag.countDocuments();
     const totalPage = Math.ceil(total / _pageSize);
-
-    // result.forEach((el) => {
-    //   el["createdAt"] = dayjs(el["createdAt"]).format("YYYY-MM-DD HH:mm");
-    // });
 
     ctx.body = {
       data: result,
