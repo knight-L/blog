@@ -4,11 +4,19 @@
  * @Author: Knight
  * @Date: 2021-03-10 22:12:24
  * @LastEditors: Knight
- * @LastEditTime: 2021-03-11 00:20:51
+ * @LastEditTime: 2021-03-11 00:50:32
  */
 const File = require("../schemas/file");
-const { createWriteStream, existsSync, mkdir } = require("fs");
+const {
+  createReadStream,
+  createWriteStream,
+  existsSync,
+  mkdir,
+} = require("fs");
 const { join } = require("path");
+const dayjs = require("dayjs");
+
+dayjs.locale("zh-cn");
 
 class FilesCtr {
   async find(ctx) {
@@ -36,13 +44,15 @@ class FilesCtr {
       // 获取上传文件
       const file = ctx.request.files.file;
 
-      const filePath = join("./public/upload");
+      const filePath = join("./public/upload", dayjs().format("YYYY-MM-DD"));
 
-      if (!existsSync(filePath)) await mkdir(filePath);
+      if (!existsSync(filePath)) await mkdir(filePath, (err) => {});
 
-      createWriteStream(join(filePath, file.name), {
-        encoding: "utf8",
-      }).write(file.buffer);
+      //使用 createWriteStream 写入数据
+      const writeStream = createWriteStream(join(filePath, file.name));
+
+      // 读取文件流，然后使用管道流pipe拼接
+      createReadStream(file.path).pipe(writeStream);
     } catch (error) {
       throw new Error(err);
     }
