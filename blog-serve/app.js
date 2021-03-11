@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2020-12-20 18:23:35
  * @LastEditors: Knight
- * @LastEditTime: 2021-03-10 22:21:04
+ * @LastEditTime: 2021-03-11 15:45:19
  */
 // 导入koa，和koa 1.x不同，在koa2中，我们导入的是一个class，因此用大写的Koa表示:
 const Koa = require("koa");
@@ -33,14 +33,16 @@ mongoose.connection.once("open", () => console.log("数据库连接成功！"));
 
 // 前后端分离，设置跨域
 app.use(cors());
+
+// 配置静态资源路径
+app.use(static(path.join(__dirname, "public")));
+
 //请求频率限制
 const limiter = RateLimit.middleware({
   interval: { min: 15 }, // 15 minutes = 15*60*1000
   max: 100, // limit each IP to 100 requests per interval
 });
 
-// 配置静态资源路径
-app.use(static(path.join(__dirname, "public")));
 app.use(limiter);
 app.use(
   koaBody({
@@ -48,9 +50,12 @@ app.use(
     formidable: {
       maxFieldsSize: 5 * 1024 * 1024, // 最大文件为5M
       multipart: true, // 是否支持 multipart-formdate 的表单
+      //   uploadDir: path.join(__dirname, "/public/uploads"),
+      //   keepExtensions: true,
     },
   })
 ); //post请求的参数转为json格式返回
+
 app.use(
   error({
     postFormat: (err, { stack, ...rest }) => {

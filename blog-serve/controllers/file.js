@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-03-10 22:12:24
  * @LastEditors: Knight
- * @LastEditTime: 2021-03-11 00:50:32
+ * @LastEditTime: 2021-03-11 17:35:20
  */
 const File = require("../schemas/file");
 const {
@@ -14,6 +14,7 @@ const {
   mkdir,
 } = require("fs");
 const { join } = require("path");
+const { resolve: urlResolve } = require("url");
 const dayjs = require("dayjs");
 
 dayjs.locale("zh-cn");
@@ -39,62 +40,66 @@ class FilesCtr {
     };
   }
 
+  /**
+   * @description: 上传文件
+   * @param {*} ctx
+   * @return {*}
+   * @author: Knight
+   */
   async create(ctx) {
     try {
+      //   ctx.verifyParams({
+      //     file: { type: "object", required: true },
+      //   });
       // 获取上传文件
-      const file = ctx.request.files.file;
+      const {
+        file: { path: fileURI, name: fileName },
+      } = ctx.request.files;
 
-      const filePath = join("./public/upload", dayjs().format("YYYY-MM-DD"));
+      //当前日期
+      const currentDate = dayjs().format("YYYY-MM-DD");
+      //文件存储路径
+      const filePath = join("./public/uploads", currentDate);
 
-      if (!existsSync(filePath)) await mkdir(filePath, (err) => {});
+      //判断是否存在文件夹,不存在则创建文件夹
+      if (!existsSync(filePath)) {
+        await new Promise((resolve, reject) => {
+          mkdir(filePath, (err) => {
+            err ? reject(err) : resolve();
+          });
+        });
+      }
 
       //使用 createWriteStream 写入数据
-      const writeStream = createWriteStream(join(filePath, file.name));
-
+      const writeStream = createWriteStream(join(filePath, fileName));
       // 读取文件流，然后使用管道流pipe拼接
-      createReadStream(file.path).pipe(writeStream);
+      createReadStream(fileURI).pipe(writeStream);
+
+      const repeatedFile = await File.findOne({ fileName });
+      if (repeatedFile) ctx.throw(409, "文件已存在！");
+      const data = await new File({
+        fileName,
+        fileURI: join(filePath, fileName),
+        thumbnailURI: join(filePath, fileName),
+      }).save();
+      ctx.body = {
+        data: {
+          _id: data._id,
+          fileName: data.fileName,
+          fileURI: urlResolve(
+            ctx.origin,
+            join("uploads", currentDate, fileName)
+          ),
+          thumbnailURI: "",
+          createdAt: data.createdAt,
+          updatedAt: data.updatedAt,
+        },
+        message: "创建成功！",
+        status: 200,
+      };
     } catch (error) {
-      throw new Error(err);
+      ctx.throw(error);
     }
-
-    // const basename = path.basename(file.path);
-    // console.log("AAAAAAAAAAAA", basename, file.path);
-    // console.log("BBBBBBBBBBBB", `${ctx.origin}/uploads/${basename}`);
-    // // 读取文件流
-    // const fileReader = fs.createReadStream(file.path);
-    // console.log(fileReader);
-    // // 设置文件保存路径
-    // const filePath = path.join(__dirname, "/public/upload/");
-    // // 组装成绝对路径
-    // const fileResource = `${filePath}${file.name}`;
-
-    // /**
-    //  * 使用 createWriteStream 写入数据，然后使用管道流pipe拼接
-    //  */
-    // const writeStream = fs.createWriteStream(fileResource);
-
-    // // 判断 /public/upload 文件夹是否存在，如果不在的话就创建一个
-    // if (!fs.existsSync(filePath)) {
-    //   fs.mkdir(filePath, (err) => {
-    //     if (err) {
-    //       throw new Error(err);
-    //     } else {
-    //       fileReader.pipe(writeStream);
-    //       ctx.body = {
-    //         url: uploadUrl + `/${file.name}`,
-    //         code: 0,
-    //         message: "上传成功",
-    //       };
-    //     }
-    //   });
-    // } else {
-    //   fileReader.pipe(writeStream);
-    //   ctx.body = {
-    //     url: uploadUrl + `/${file.name}`,
-    //     code: 0,
-    //     message: "上传成功",
-    //   };
-    // }
   }
 }
 

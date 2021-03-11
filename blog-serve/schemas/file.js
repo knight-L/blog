@@ -4,15 +4,7 @@
  * @Author: Knight
  * @Date: 2021-03-10 19:45:24
  * @LastEditors: Knight
- * @LastEditTime: 2021-03-10 21:16:13
- */
-/*
- * @Description:用户
- * @Version: 1.0
- * @Author: Knight
- * @Date: 2021-01-28 23:25:06
- * @LastEditors: Knight
- * @LastEditTime: 2021-03-10 19:34:26
+ * @LastEditTime: 2021-03-11 17:48:22
  */
 const { Schema, model } = require("mongoose");
 const dayjs = require("dayjs");
