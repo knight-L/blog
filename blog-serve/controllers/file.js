@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-03-10 22:12:24
  * @LastEditors: Knight
- * @LastEditTime: 2021-03-11 17:35:20
+ * @LastEditTime: 2021-03-11 22:21:34
  */
 const File = require("../schemas/file");
 const {
@@ -82,6 +82,7 @@ class FilesCtr {
         fileURI: join(filePath, fileName),
         thumbnailURI: join(filePath, fileName),
       }).save();
+
       ctx.body = {
         data: {
           _id: data._id,
