@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-01-25 21:28:15
  * @LastEditors: Knight
- * @LastEditTime: 2021-03-09 11:08:25
+ * @LastEditTime: 2021-03-12 16:23:26
 -->
 <template>
   <div class="grid grid-cols-3 gap-6 xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 xxl:grid-cols-3">
@@ -15,13 +15,12 @@
            :data-funlazy="item.img"
            alt="card-title-img">
       <div class="p-4">
-        <!-- <h4 class="font-semibold text-lg">{{item.title}}</h4> -->
-        <div class="text-gray-600 text-xs uppercase font-semibold tracking-wide">
+        <div class="text-gray-500 text-xs font-semibold tracking-wide leading-7">
           {{item.time}}
         </div>
         <div>
-          <span class="text-gray-600 text-sm">{{item.title}}</span>
-
+          <p class="text-gray-900 text-sm leading-6 mb-1">{{item.title}}</p>
+          <p class="text-gray-500 font-semibold text-sm leading-5">A utility-first CSS framework packed with classes like flex, pt-4, text-center.</p>
         </div>
         <div class="mt-1">
           <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full mr-1"
@@ -39,6 +38,9 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import FunLazy from "funlazy";
+import dayjs from "dayjs";
+
+dayjs.locale("zh-cn");
 
 @Options({
   components: {},
@@ -126,14 +128,14 @@ export default class Card extends Vue {
   }
 
   private getLiat(): any[] {
-    const _date = new Date();
+    const _date = `knight · ${dayjs().format("YYYY-MM-DD HH:mm")}`;
     const _list = [] as any[];
     const _num = Math.ceil(Math.random() * 100) || 50;
     for (let i = 0; i < _num; i++) {
       _list.push({
         id: i,
         img: this.imageData[Math.floor(Math.random() * this.imageData.length)],
-        title: `标题-----${++i}`,
+        title: `Rapidly build modern websites without ever leaving your HTML.${++i}`,
         time: _date.toLocaleString(),
         tags: this.randomTags(),
       });
