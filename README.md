@@ -31,9 +31,18 @@ npm run serve
 # 安装后台依赖
 npm install
 # 运行后台项目
-npm run dev
+npm run serve
 
 # 即可通过 http://127.0.0.1:3000访问
+```
+
+## 项目目录
+
+```
+| blog-admin            后台管理系统
+| blog-home             用户端
+| blog-serve            后台
+| .gitignore            git配置
 ```
 
 ### 打包
