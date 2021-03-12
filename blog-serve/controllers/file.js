@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-03-10 22:12:24
  * @LastEditors: Knight
- * @LastEditTime: 2021-03-11 22:21:34
+ * @LastEditTime: 2021-03-11 22:40:54
  */
 const File = require("../schemas/file");
 const {
@@ -15,6 +15,7 @@ const {
 } = require("fs");
 const { join } = require("path");
 const { resolve: urlResolve } = require("url");
+const images = require("images");
 const dayjs = require("dayjs");
 
 dayjs.locale("zh-cn");
@@ -74,6 +75,13 @@ class FilesCtr {
       const writeStream = createWriteStream(join(filePath, fileName));
       // 读取文件流，然后使用管道流pipe拼接
       createReadStream(fileURI).pipe(writeStream);
+
+      images(fileURI) //加载图像文件
+        .size(400) //等比缩放图像到400像素宽
+        //.draw(images("logo.png"), 10, 10) //在(10,10)处绘制Logo
+        .save("output.jpg", {
+          quality: 50, //保存图片到文件,图片质量为50
+        });
 
       const repeatedFile = await File.findOne({ fileName });
       if (repeatedFile) ctx.throw(409, "文件已存在！");
