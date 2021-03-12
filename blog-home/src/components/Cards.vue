@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-01-25 21:28:15
  * @LastEditors: Knight
- * @LastEditTime: 2021-03-12 16:23:26
+ * @LastEditTime: 2021-03-12 16:36:59
 -->
 <template>
   <div class="grid grid-cols-3 gap-6 xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 xxl:grid-cols-3">
@@ -22,7 +22,7 @@
           <p class="text-gray-900 text-sm leading-6 mb-1">{{item.title}}</p>
           <p class="text-gray-500 font-semibold text-sm leading-5">A utility-first CSS framework packed with classes like flex, pt-4, text-center.</p>
         </div>
-        <div class="mt-1">
+        <div class="mt-1 mb-1">
           <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full mr-1"
                 v-for="tag in item.tags"
                 :key="tag.id"
