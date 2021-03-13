@@ -11,6 +11,12 @@ import App from './App.vue';
 import { Layout, Row, Col, Slider, Menu, Button, Table, Form, Input, Steps, Select } from 'ant-design-vue';
 import router from './router';
 import store from './store';
+import VMdEditor from '@kangc/v-md-editor';
+import '@kangc/v-md-editor/lib/style/base-editor.css';
+import githubTheme from '@kangc/v-md-editor/lib/theme/github.js';
+import '@kangc/v-md-editor/lib/theme/style/github.css';
+
+VMdEditor.use(githubTheme);
 
 createApp(App)
     .use(store)
@@ -26,4 +32,5 @@ createApp(App)
     .use(Input)
     .use(Steps)
     .use(Select)
+    .use(VMdEditor)
     .mount('#app');

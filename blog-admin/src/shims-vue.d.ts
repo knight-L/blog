@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-01-30 21:19:07
  * @LastEditors: Knight
- * @LastEditTime: 2021-02-22 21:57:55
+ * @LastEditTime: 2021-03-13 10:29:42
  */
 /* eslint-disable */
 declare module '*.vue' {
@@ -12,3 +12,6 @@ declare module '*.vue' {
     const component: DefineComponent<{}, {}, any>
     export default component
 }
+
+declare module '@kangc/v-md-editor';
+declare module '@kangc/v-md-editor/lib/theme/github.js';
