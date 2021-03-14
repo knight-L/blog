@@ -4,7 +4,7 @@
  * @Autor: Knight
  * @Date: 2020-12-25 21:07:42
  * @LastEditors: Knight
- * @LastEditTime: 2021-03-12 17:00:26
+ * @LastEditTime: 2021-03-14 18:15:17
 -->
 <template>
   <div class="rounded-t-xl from-purple-50 to-purple-100">
@@ -19,7 +19,7 @@
 
         <div class="from-indigo-50 to-indigo-100">
 
-          <form class="relative mb-10">
+          <form class="relative mb-10 xs:px-6">
             <svg width="40"
                  height="20"
                  fill="currentColor"

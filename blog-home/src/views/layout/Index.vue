@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2020-12-25 22:42:21
  * @LastEditors: Knight
- * @LastEditTime: 2021-01-27 23:20:17
+ * @LastEditTime: 2021-03-14 18:16:19
 -->
 <template>
   <div class="h-screen overflow-y-scroll"
@@ -42,9 +42,9 @@ import Footer from "./components/footer/Index.vue";
   },
 })
 export default class Layout extends Vue {
-  private navbarSticky = false;
+  public navbarSticky = false;
 
-  private onScroll(ev: Event): void {
+  public onScroll(ev: Event): void {
     const scrollTop = (ev.target as HTMLElement).scrollTop; // 滚动条偏移量
     // console.log("滚动条偏移量", scrollTop);
     if (scrollTop > 100) {

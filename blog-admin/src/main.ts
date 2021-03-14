@@ -4,11 +4,11 @@
  * @Author: Knight
  * @Date: 2021-01-30 21:19:07
  * @LastEditors: Knight
- * @LastEditTime: 2021-02-22 22:11:38
+ * @LastEditTime: 2021-03-13 11:06:12
  */
 import { createApp } from 'vue';
 import App from './App.vue';
-import { Layout, Row, Col, Slider, Menu, Button, Table, Form, Input, Steps, Select } from 'ant-design-vue';
+import { Layout, Row, Col, Slider, Menu, Button, Table, Form, Input, Steps, Select, Checkbox } from 'ant-design-vue';
 import router from './router';
 import store from './store';
 import VMdEditor from '@kangc/v-md-editor';
@@ -32,5 +32,6 @@ createApp(App)
     .use(Input)
     .use(Steps)
     .use(Select)
+    .use(Checkbox)
     .use(VMdEditor)
     .mount('#app');

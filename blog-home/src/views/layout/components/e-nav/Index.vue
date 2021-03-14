@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-01-27 15:25:13
  * @LastEditors: Knight
- * @LastEditTime: 2021-02-03 11:22:09
+ * @LastEditTime: 2021-03-14 18:14:22
 -->
 <template>
   <nav>
@@ -168,8 +168,8 @@ import router from "../../../../router/index";
   components: {},
 })
 export default class ENav extends Vue {
-  private activeNav = "";
-  private mobileMenu = false;
+  public activeNav = "";
+  public mobileMenu = false;
   private routes = router.options.routes;
 
   created(): void {

@@ -4,11 +4,11 @@
  * @Author: Knight
  * @Date: 2021-01-31 18:50:01
  * @LastEditors: Knight
- * @LastEditTime: 2021-03-13 10:42:09
+ * @LastEditTime: 2021-03-13 14:53:14
 -->
 <template>
   <div style="background: rgb(255, 255, 255);padding: 24px;">
-    <a-steps :current="current">
+    <!-- <a-steps :current="current">
       <a-step v-for="item in steps"
               :key="item.title"
               :title="item.title" />
@@ -23,7 +23,7 @@
       <a-button v-if="current > 0"
                 style="margin-left: 8px"
                 @click="prev">上一步</a-button>
-    </div>
+    </div> -->
 
     <a-form ref="formRef"
             :model="formState"
@@ -31,11 +31,21 @@
             :label-col="{ span: 4 }"
             :wrapper-col="{ span: 14 }">
       <a-form-item ref="name"
-                   label="Activity name"
+                   label="标题"
                    name="name">
         <a-input v-model:value="formState.name" />
       </a-form-item>
-      <a-form-item label="Activity zone"
+      <a-form-item ref="name"
+                   label="描述"
+                   name="name">
+        <a-input v-model:value="formState.name" />
+      </a-form-item>
+      <a-form-item ref="name"
+                   label="封面"
+                   name="name">
+        <a-input v-model:value="formState.name" />
+      </a-form-item>
+      <a-form-item label="标签"
                    name="region">
         <a-select v-model:value="formState.region"
                   placeholder="please select your zone">
@@ -43,14 +53,19 @@
           <a-select-option value="beijing">Zone two</a-select-option>
         </a-select>
       </a-form-item>
-      <a-form-item label="Activity form"
+      <a-form-item label="内容"
                    name="desc">
         <v-md-editor v-model="formState.desc"
                      height="400px"></v-md-editor>
       </a-form-item>
       <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
+        <a-checkbox :checked="false">
+          立即发布
+        </a-checkbox>
+      </a-form-item>
+      <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
         <a-button type="primary"
-                  @click="onSubmit">Create</a-button>
+                  @click="onSubmit">创建</a-button>
         <!-- <a-button style="margin-left: 10px"
                   @click="resetForm">Reset</a-button> -->
       </a-form-item>
