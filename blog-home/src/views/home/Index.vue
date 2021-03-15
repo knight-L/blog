@@ -4,7 +4,7 @@
  * @Autor: Knight
  * @Date: 2020-12-25 21:07:42
  * @LastEditors: Knight
- * @LastEditTime: 2021-03-14 18:15:17
+ * @LastEditTime: 2021-03-15 16:55:24
 -->
 <template>
   <div class="rounded-t-xl from-purple-50 to-purple-100">
@@ -36,6 +36,8 @@
 
           <Cards></Cards>
 
+          <!-- <Pagination class="mt-10 text-center"></Pagination> -->
+
         </div>
 
       </div>
@@ -50,10 +52,12 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import Cards from "../../components/Cards.vue";
+import Pagination from "../../components/Pagination.vue";
 
 @Options({
   components: {
     Cards,
+    Pagination,
   },
 })
 export default class Home extends Vue {

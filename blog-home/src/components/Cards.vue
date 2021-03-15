@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-01-25 21:28:15
  * @LastEditors: Knight
- * @LastEditTime: 2021-03-12 16:36:59
+ * @LastEditTime: 2021-03-15 17:23:59
 -->
 <template>
   <div class="grid grid-cols-3 gap-6 xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 xxl:grid-cols-3">
@@ -12,8 +12,9 @@
          v-for="item in list"
          :key="item.id">
       <img class="w-full h-48 rounded-t-lg object-cover"
+           alt="card-title-img"
            :data-funlazy="item.img"
-           alt="card-title-img">
+           onerror="hideImg2();">
       <div class="p-4">
         <div class="text-gray-500 text-xs font-semibold tracking-wide leading-7">
           {{item.time}}
@@ -32,6 +33,8 @@
         </div>
       </div>
     </div>
+
+    <Observer @intersect="intersected"></Observer>
   </div>
 </template>
 
@@ -39,11 +42,12 @@
 import { Options, Vue } from "vue-class-component";
 import FunLazy from "funlazy";
 import dayjs from "dayjs";
+import Observer from "./Observer.vue";
 
 dayjs.locale("zh-cn");
 
 @Options({
-  components: {},
+  components: { Observer },
 })
 export default class Card extends Vue {
   private imageData = [
@@ -113,7 +117,7 @@ export default class Card extends Vue {
     },
   ];
 
-  private list = [] as any[];
+  public list = [] as any[];
 
   created(): void {
     this.list = this.getLiat();
@@ -121,9 +125,10 @@ export default class Card extends Vue {
 
   mounted(): void {
     FunLazy({
-      effect: "fadeIn",
-      useErrorImagePlaceholder: true,
-      // strictLazyMode: true,
+      effect: "fadeIn", //图片显示效果，可选值：show, fadeIn
+      useErrorImagePlaceholder: true, //当图片加载失败时，使用指定的图片进行占位显示（可使用内置灰色图或自定义图片）
+      autoCheckChange: true, //自动检测目标元素内需要进行懒加载操作的元素的变化（例如：动态添加新元素）
+      strictLazyMode: false, //严格懒加载模式
     });
   }
 
@@ -153,6 +158,13 @@ export default class Card extends Vue {
       });
     }
     return _list;
+  }
+
+  public async intersected(): Promise<void> {
+    console.log("加载更多数据...");
+    setTimeout(() => {
+      this.list = this.list.concat(this.getLiat());
+    }, 500);
   }
 }
 </script>

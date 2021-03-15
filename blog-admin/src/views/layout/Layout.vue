@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-01-31 18:09:01
  * @LastEditors: Knight
- * @LastEditTime: 2021-03-02 15:19:01
+ * @LastEditTime: 2021-03-15 16:20:36
 -->
 <template>
   <a-layout class="layout">
@@ -32,9 +32,9 @@ import Header from "./Header.vue";
   },
 })
 export default class Layout extends Vue {
-  private collapsed = false;
+  public collapsed = false;
 
-  private toggleCollapse(): void {
+  public toggleCollapse(): void {
     this.collapsed = !this.collapsed;
   }
 }
