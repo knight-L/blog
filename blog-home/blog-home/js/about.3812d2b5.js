@@ -1,1 +1,0 @@
-(self["webpackChunkEAR"]=self["webpackChunkEAR"]||[]).push([[443],{6221:function(n,u,e){"use strict";e.r(u),e.d(u,{default:function(){return i}});var t=e(5393),a={class:"about"},r=(0,t.Wm)("h1",null,"This is an about page",-1);function s(n,u){return(0,t.wg)(),(0,t.j4)("div",a,[r])}const c={};c.render=s;var i=c}}]);
