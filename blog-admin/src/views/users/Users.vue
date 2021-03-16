@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-01-31 18:35:43
  * @LastEditors: Knight
- * @LastEditTime: 2021-02-05 10:31:30
+ * @LastEditTime: 2021-03-16 20:18:10
 -->
 <template>
   <div>
@@ -40,15 +40,15 @@ import { create, getUser } from "../../api/user/user";
   components: {},
 })
 export default class Users extends Vue {
-  private loading = false;
-  private listData = [];
-  private pagination = {};
-  private listQuery = {
+  public loading = false;
+  public listData = [];
+  public pagination = {};
+  public listQuery = {
     page: 1,
     pageSize: 10,
   };
 
-  private columns = [
+  public columns = [
     {
       title: "ID",
       dataIndex: "_id",
@@ -98,7 +98,7 @@ export default class Users extends Vue {
     this.getUsers();
   }
 
-  private async createUser(): Promise<void> {
+  public async createUser(): Promise<void> {
     for (let i = 1; i <= new Array(50).length; i++) {
       try {
         const data = await create({ username: `user-${i}`, password: "admin" });
@@ -107,7 +107,7 @@ export default class Users extends Vue {
     }
   }
 
-  private async getUsers(): Promise<void> {
+  public async getUsers(): Promise<void> {
     try {
       this.loading = true;
       const { data, pageSize, total, page } = await getUser(this.listQuery);

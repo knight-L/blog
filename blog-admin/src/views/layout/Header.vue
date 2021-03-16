@@ -4,11 +4,11 @@
  * @Author: Knight
  * @Date: 2021-01-31 18:08:21
  * @LastEditors: Knight
- * @LastEditTime: 2021-02-23 22:29:30
+ * @LastEditTime: 2021-03-16 20:39:45
 -->
 <template>
   <a-layout-header style="background: #fff; padding: 0;position:fixed;zIndex: 1;width:100%;">
-    <menu-unfold-outlined v-if="collapsed"
+    <menu-unfold-outlined v-if="$options.props.collapsed"
                           class="trigger"
                           @click="$emit('toggleCollapse')" />
     <menu-fold-outlined v-else
@@ -26,7 +26,9 @@ import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons-vue";
     MenuUnfoldOutlined,
     MenuFoldOutlined,
   },
-  props: ["collapsed"],
+  props: {
+    collapsed: Boolean,
+  },
   emits: ["toggleCollapse"],
 })
 export default class Header extends Vue {}

@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-01-31 18:37:03
  * @LastEditors: Knight
- * @LastEditTime: 2021-03-06 21:08:40
+ * @LastEditTime: 2021-03-16 20:18:43
 -->
 <template>
   <div class="login">
@@ -80,13 +80,13 @@ import router from "../../router/index";
   },
 })
 export default class Login extends Vue {
-  private loading = false;
-  private loginform = {
+  public loading = false;
+  public loginform = {
     username: "",
     password: "",
   };
 
-  private formRules = {
+  public formRules = {
     username: [
       {
         required: true,
@@ -103,7 +103,7 @@ export default class Login extends Vue {
     ],
   };
 
-  private logIn(): void {
+  public logIn(): void {
     (this.$refs["formRef"] as any)
       .validate()
       .then(

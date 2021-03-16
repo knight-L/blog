@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-01-31 18:08:45
  * @LastEditors: Knight
- * @LastEditTime: 2021-02-06 22:51:27
+ * @LastEditTime: 2021-03-16 20:59:54
 -->
 <template>
   <a-layout-sider :collapsed="collapsed"
@@ -65,10 +65,19 @@ import {
     TagOutlined,
     UserOutlined,
   },
-  props: ["collapsed"],
+  props: {
+    collapsed: {
+      type: Boolean,
+      default: false,
+    },
+  },
 })
 export default class Sider extends Vue {
   public selectedKeys = ["1"];
+
+  mounted(): void {
+    console.log(this.$options.props.collapsed);
+  }
 
   public menuSelect(selectedKeys: string[]): void {
     this.selectedKeys = selectedKeys;

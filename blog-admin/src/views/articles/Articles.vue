@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-01-31 18:50:01
  * @LastEditors: Knight
- * @LastEditTime: 2021-03-13 14:53:14
+ * @LastEditTime: 2021-03-16 20:11:38
 -->
 <template>
   <div style="background: rgb(255, 255, 255);padding: 24px;">
@@ -94,7 +94,7 @@ interface FormState {
 export default class Articles extends Vue {
   private current = 0;
   private formRef = ref();
-  private steps = [
+  public steps = [
     {
       title: "First",
       content: "First-content",
@@ -109,7 +109,7 @@ export default class Articles extends Vue {
     },
   ];
 
-  private formState = {
+  public formState = {
     name: "",
     region: undefined,
     date1: undefined,
@@ -119,7 +119,7 @@ export default class Articles extends Vue {
     desc: "",
   };
 
-  private rules = {
+  public rules = {
     name: [
       {
         required: true,
@@ -169,7 +169,7 @@ export default class Articles extends Vue {
 
   //mounted(): void {}
 
-  private onSubmit() {
+  public onSubmit(): void {
     // console.log(this.formRef.$refs);
     // this.formRef.value
     //   .validate()

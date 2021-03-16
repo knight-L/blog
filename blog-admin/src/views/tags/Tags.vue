@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-01-31 18:49:27
  * @LastEditors: Knight
- * @LastEditTime: 2021-02-05 20:20:54
+ * @LastEditTime: 2021-03-16 20:18:17
 -->
 <template>
   <div>
@@ -34,15 +34,15 @@ import { create, getTag } from "../../api/tag/tag";
   components: {},
 })
 export default class Tags extends Vue {
-  private loading = false;
-  private listData = [];
-  private pagination = {};
-  private listQuery = {
+  public loading = false;
+  public listData = [];
+  public pagination = {};
+  public listQuery = {
     page: 1,
     pageSize: 10,
   };
 
-  private columns = [
+  public columns = [
     {
       title: "ID",
       dataIndex: "_id",
@@ -74,7 +74,7 @@ export default class Tags extends Vue {
     this.getTags();
   }
 
-  private async createTag(): Promise<void> {
+  public async createTag(): Promise<void> {
     for (let i = 1; i <= new Array(50).length; i++) {
       try {
         const data = await create({ name: `tag-${i}` });
@@ -85,7 +85,7 @@ export default class Tags extends Vue {
     }
   }
 
-  private async getTags(): Promise<void> {
+  public async getTags(): Promise<void> {
     try {
       this.loading = true;
       const { data, pageSize, total, page } = await getTag(this.listQuery);
