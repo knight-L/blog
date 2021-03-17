@@ -1,4 +1,3 @@
-
 # Blog
 
 Blog是一个基于vue和node的小小小博客
@@ -23,9 +22,9 @@ npm install
 # 运行服务
 npm run dev
 
-# 安装前台依赖
+# 安装用户端依赖
 npm install
-# 运行前台项目
+# 运行用户端项目
 npm run serve
 
 # 安装后台依赖
