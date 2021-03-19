@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-01-25 21:28:15
  * @LastEditors: Knight
- * @LastEditTime: 2021-03-15 17:23:59
+ * @LastEditTime: 2021-03-19 23:00:02
 -->
 <template>
   <div class="grid grid-cols-3 gap-6 xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 xxl:grid-cols-3">
@@ -160,11 +160,13 @@ export default class Card extends Vue {
     return _list;
   }
 
-  public async intersected(): Promise<void> {
-    console.log("加载更多数据...");
-    setTimeout(() => {
-      this.list = this.list.concat(this.getLiat());
-    }, 500);
+  public async intersected(ev: boolean): Promise<void> {
+    if (ev) {
+      console.log("加载更多数据...");
+      setTimeout(() => {
+        this.list = this.list.concat(this.getLiat());
+      }, 500);
+    }
   }
 }
 </script>

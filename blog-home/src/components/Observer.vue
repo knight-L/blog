@@ -4,11 +4,11 @@
  * @Author: Knight
  * @Date: 2021-03-15 16:15:18
  * @LastEditors: Knight
- * @LastEditTime: 2021-03-15 17:02:55
+ * @LastEditTime: 2021-03-19 23:06:17
 -->
 <template>
   <div class="observer">
-    加载中...
+    <!-- 加载中... -->
   </div>
 </template>
 
@@ -30,9 +30,9 @@ export default class Observer extends Vue {
 
   mounted(): void {
     this.observer = new IntersectionObserver(([entry]) => {
-      if (entry && entry.isIntersecting) {
-        this.$emit("intersect");
-      }
+      entry && entry.isIntersecting
+        ? this.$emit("intersect", true)
+        : this.$emit("intersect", false);
     }, this.$options.props.options);
 
     this.observer.observe(this.$el);

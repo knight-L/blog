@@ -4,13 +4,12 @@
  * @Author: Knight
  * @Date: 2020-12-25 22:42:21
  * @LastEditors: Knight
- * @LastEditTime: 2021-03-14 18:16:19
+ * @LastEditTime: 2021-03-19 23:12:51
 -->
 <template>
-  <div class="h-screen overflow-y-scroll"
-       @scroll.passive="onScroll($event)">
+  <div>
     <div class="relative min-h-screen pb-24">
-
+      <Observer @intersect="intersected"></Observer>
       <Hander v-if="navbarSticky"></Hander>
 
       <e-nav></e-nav>
@@ -33,25 +32,21 @@ import { Options, Vue } from "vue-class-component";
 import Hander from "./components/handler/Index.vue";
 import ENav from "./components/e-nav/Index.vue";
 import Footer from "./components/footer/Index.vue";
+import Observer from "../../components/Observer.vue";
 
 @Options({
   components: {
     Hander,
     ENav,
     Footer,
+    Observer,
   },
 })
 export default class Layout extends Vue {
   public navbarSticky = false;
 
-  public onScroll(ev: Event): void {
-    const scrollTop = (ev.target as HTMLElement).scrollTop; // 滚动条偏移量
-    // console.log("滚动条偏移量", scrollTop);
-    if (scrollTop > 100) {
-      this.navbarSticky = true;
-    } else {
-      this.navbarSticky = false;
-    }
+  public intersected(ev: boolean): void {
+    this.navbarSticky = !ev;
   }
 }
 </script>
