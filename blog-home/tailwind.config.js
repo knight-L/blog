@@ -2,7 +2,10 @@
 const colors = require("./colors");
 
 module.exports = {
-  purge: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
+  purge: {
+    enabled: true,
+    content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
+  },
   presets: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
