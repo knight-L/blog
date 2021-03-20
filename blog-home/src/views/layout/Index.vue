@@ -4,13 +4,13 @@
  * @Author: Knight
  * @Date: 2020-12-25 22:42:21
  * @LastEditors: Knight
- * @LastEditTime: 2021-03-19 23:12:51
+ * @LastEditTime: 2021-03-20 20:09:44
 -->
 <template>
   <div>
     <div class="relative min-h-screen pb-24">
       <Observer @intersect="intersected"></Observer>
-      <Hander v-if="navbarSticky"></Hander>
+      <Hander v-show="navbarSticky"></Hander>
 
       <e-nav></e-nav>
 
