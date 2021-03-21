@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-03-15 16:15:18
  * @LastEditors: Knight
- * @LastEditTime: 2021-03-19 23:06:17
+ * @LastEditTime: 2021-03-21 13:57:48
 -->
 <template>
   <div class="observer">
@@ -19,7 +19,7 @@ import "intersection-observer";
 @Options({
   props: {
     options: {
-      options: Object,
+      type: Object,
       default: {},
     },
   },
