@@ -1,11 +1,10 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 /*
  * @Description:
  * @Version: 1.0
  * @Author: Knight
  * @Date: 2020-12-25 21:27:10
  * @LastEditors: Knight
- * @LastEditTime: 2021-03-15 13:48:16
+ * @LastEditTime: 2021-03-23 15:45:29
  */
 const WebpackBar = require('webpackbar');
 
