@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-03-10 22:12:24
  * @LastEditors: Knight
- * @LastEditTime: 2021-03-11 22:40:54
+ * @LastEditTime: 2021-03-24 17:07:34
  */
 const File = require("../schemas/file");
 const {
@@ -56,6 +56,8 @@ class FilesCtr {
       const {
         file: { path: fileURI, name: fileName },
       } = ctx.request.files;
+      const repeatedFile = await File.findOne({ fileName });
+      if (repeatedFile) ctx.throw(409, "文件已存在！");
 
       //当前日期
       const currentDate = dayjs().format("YYYY-MM-DD");
@@ -79,16 +81,14 @@ class FilesCtr {
       images(fileURI) //加载图像文件
         .size(400) //等比缩放图像到400像素宽
         //.draw(images("logo.png"), 10, 10) //在(10,10)处绘制Logo
-        .save("output.jpg", {
-          quality: 50, //保存图片到文件,图片质量为50
+        .save(join(filePath, `thumbnail_${fileName}`), {
+          quality: 100, //保存图片到文件,图片质量为50
         });
 
-      const repeatedFile = await File.findOne({ fileName });
-      if (repeatedFile) ctx.throw(409, "文件已存在！");
       const data = await new File({
         fileName,
         fileURI: join(filePath, fileName),
-        thumbnailURI: join(filePath, fileName),
+        thumbnailURI: join(filePath, `thumbnail_${fileName}`),
       }).save();
 
       ctx.body = {
