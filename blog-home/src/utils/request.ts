@@ -4,14 +4,14 @@
  * @Author: Knight
  * @Date: 2021-01-30 23:44:48
  * @LastEditors: Knight
- * @LastEditTime: 2021-03-23 22:34:58
+ * @LastEditTime: 2021-03-23 23:00:51
  */
 import axios from "axios";
 
 // 创建 axios 实例
 const request = axios.create({
     // API 请求的默认前缀
-    baseURL: process.env.VUE_APP_API_BASE_URL,
+    baseURL: process.env.VUE_APP_BASE_URL,
     timeout: 6000, // 请求超时时间
 });
 

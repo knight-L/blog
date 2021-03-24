@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-03-15 16:15:18
  * @LastEditors: Knight
- * @LastEditTime: 2021-03-23 21:08:30
+ * @LastEditTime: 2021-03-24 13:47:38
 -->
 <template>
   <div class="observer text-gray-500 text-sm"
@@ -59,31 +59,6 @@ export default defineComponent({
     };
   },
 });
-
-// @Options({
-//   components: {
-//     Loading,
-//   },
-
-//   emits: ["intersect"],
-// })
-// export default class Observer extends Vue {
-//   private observer!: IntersectionObserver;
-
-//   mounted(): void {
-//     this.observer = new IntersectionObserver(([entry]) => {
-//       entry && entry.isIntersecting
-//         ? this.$emit("intersect", true)
-//         : this.$emit("intersect", false);
-//     }, this.$options.props.options);
-
-//     this.observer.observe(this.$el);
-//   }
-
-//   destroyed(): void {
-//     this.observer.disconnect();
-//   }
-// }
 </script>
 <style lang="scss" scoped>
 </style>
