@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-01-25 21:28:15
  * @LastEditors: Knight
- * @LastEditTime: 2021-03-24 16:07:13
+ * @LastEditTime: 2021-03-25 16:29:05
 -->
 <template>
   <div class="grid grid-cols-3 gap-6 xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 xxl:grid-cols-3">
@@ -12,9 +12,11 @@
          v-for="item in data"
          :key="item.id">
       <img class="w-full h-48 rounded-t-lg object-cover"
-           alt="card-title-img"
-           :data-funlazy="item.img"
-           onerror="hideImg2();">
+           alt="Card Title Img"
+           :src="placeholder"
+           v-lazyload="item.img"
+           @load="imgLoad"
+           @error="imgError">
       <div class="p-4">
         <div class="text-gray-500 text-xs font-semibold tracking-wide leading-7">
           {{item.time}}
@@ -61,9 +63,29 @@ export default defineComponent({
       orange = "bg-orange-100 text-orange-500",
     }
 
-    return { Colors };
+    const placeholder =
+      "data:img/jpg;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAMAAAAoyzS7AAAAA1BMVEXd3d3u346CAAAADUlEQVR42gECAP3/AAAAAgABUyucMAAAAABJRU5ErkJggg==";
+
+    function imgLoad(event: Event) {
+      const img = event.target as HTMLImageElement;
+      img.classList.add("anim_fade");
+      img.onload = null;
+    }
+
+    function imgError(event: Event) {
+      const img = event.target as HTMLImageElement;
+      img.src = placeholder;
+      img.onerror = null;
+    }
+
+    return { imgLoad, imgError, Colors, placeholder };
   },
 });
 </script>
 <style lang="scss" scoped>
+@import "../styles/animation.css";
+.anim_fade {
+  animation-name: fadeIn;
+  animation-duration: 500ms;
+}
 </style>

@@ -4,7 +4,7 @@
  * @Autor: Knight
  * @Date: 2020-12-25 21:07:42
  * @LastEditors: Knight
- * @LastEditTime: 2021-03-24 13:50:30
+ * @LastEditTime: 2021-03-25 13:52:20
 -->
 <template>
   <div class="rounded-t-xl from-purple-50 to-purple-100">
@@ -17,7 +17,7 @@
 
       <div class="flex-grow rounded-md text-white text-2xl font-extrabold flex items-center justify-center">
 
-        <div class="from-indigo-50 to-indigo-100">
+        <div class="from-indigo-50 to-indigo-100 w-full">
 
           <Search></Search>
 
@@ -38,8 +38,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from "vue";
-import FunLazy from "funlazy";
+import { defineComponent, ref } from "vue";
 import dayjs from "dayjs";
 import Observer from "../../components/Observer.vue";
 import Search from "../../components/Search.vue";
@@ -66,16 +65,6 @@ export default defineComponent({
         console.error(err);
       }
     }
-
-    onMounted(async () => {
-      await getLiat();
-      FunLazy({
-        effect: "fadeIn", //图片显示效果，可选值：show, fadeIn
-        useErrorImagePlaceholder: true, //当图片加载失败时，使用指定的图片进行占位显示（可使用内置灰色图或自定义图片）
-        autoCheckChange: true, //自动检测目标元素内需要进行懒加载操作的元素的变化（例如：动态添加新元素）
-        strictLazyMode: false, //严格懒加载模式
-      });
-    });
 
     function intersected(ev: boolean): void {
       if (ev) {
