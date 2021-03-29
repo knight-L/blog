@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-01-25 21:28:15
  * @LastEditors: Knight
- * @LastEditTime: 2021-03-29 15:42:34
+ * @LastEditTime: 2021-03-29 16:10:41
 -->
 <template>
   <div class="grid grid-cols-3 gap-6 xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 xxl:grid-cols-3">
@@ -12,16 +12,16 @@
          v-for="(item,index) in data"
          :key="item.id"
          :class="{'lg:flex lg:col-span-2':index+1&2}">
-      <img class="object-cover"
-           :class="[index+1&2 ? 'h-full w-6/12 order-last' : 'h-48 w-full rounded-t-lg']"
+      <img class="h-48 w-full rounded-t-lg object-cover"
+           :class="{'lg:h-full lg:w-6/12 lg:order-last lg:rounded-none':index+1&2}"
            alt="Card Title Img"
            :src="placeholder"
            v-if="item.img"
            v-lazyload="item.img"
            @load="imgLoad"
            @error="imgError">
-      <div class="p-4"
-           :class="[!!item.img ? index+1&2 ? 'img-content  w-6/12': 'def-content' : 'not-img-content']">
+      <div class="def-content"
+           :class="[{'not-img-content':!item.img},{'img-content':index+1&2}]">
         <div class="text-xs font-semibold tracking-wide leading-7 date">
           {{item.time}}
         </div>
@@ -95,6 +95,7 @@ export default defineComponent({
 }
 
 .def-content {
+  @apply p-4;
   .date {
     @apply text-gray-500;
   }
@@ -109,17 +110,17 @@ export default defineComponent({
 }
 
 .img-content {
-  @apply flex flex-col justify-evenly h-full;
+  @apply lg:flex lg:flex-col lg:justify-evenly lg:h-full lg:w-6/12;
   .date {
-    @apply text-gray-500;
+    @apply lg:text-gray-500;
   }
 
   .title {
-    @apply text-gray-900;
+    @apply lg:text-gray-900;
   }
 
   .desc {
-    @apply text-gray-500;
+    @apply lg:text-gray-500;
   }
 }
 
