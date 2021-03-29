@@ -4,14 +4,16 @@
  * @Author: Knight
  * @Date: 2021-01-25 21:28:15
  * @LastEditors: Knight
- * @LastEditTime: 2021-03-26 10:50:19
+ * @LastEditTime: 2021-03-26 17:48:41
 -->
 <template>
   <div class="grid grid-cols-3 gap-6 xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 xxl:grid-cols-3">
-    <div class="bg-white rounded-lg overflow-hidden shadow-xl cursor-pointer transform transition motion-reduce:transform-none hover:scale-105 duration-500 focus:outline-none"
-         v-for="item in data"
-         :key="item.id">
-      <img class="w-full h-48 rounded-t-lg object-cover"
+    <div class="bg-white rounded-lg overflow-hidden shadow-2xl cursor-pointer transform transition motion-reduce:transform-none hover:scale-105 duration-500 focus:outline-none"
+         v-for="(item,index) in data"
+         :key="item.id"
+         :class="{'lg:flex lg:col-span-2':index+1&2}">
+      <img class="w-full rounded-t-lg object-cover"
+           :class="[index+1&2 ? 'h-full order-last flex-1' : 'h-48']"
            alt="Card Title Img"
            :src="placeholder"
            v-if="item.img"
@@ -19,7 +21,7 @@
            @load="imgLoad"
            @error="imgError">
       <div class="p-4"
-           :class="[!!item.img ? 'def-content' : 'not-img-content']">
+           :class="[!!item.img ? index+1&2 ? 'img-content flex-1': 'def-content' : 'not-img-content']">
         <div class="text-xs font-semibold tracking-wide leading-7 date">
           {{item.time}}
         </div>
@@ -105,8 +107,23 @@ export default defineComponent({
   }
 }
 
+.img-content {
+  @apply flex flex-col justify-evenly h-full;
+  .date {
+    @apply text-gray-500;
+  }
+
+  .title {
+    @apply text-gray-900;
+  }
+
+  .desc {
+    @apply text-gray-500;
+  }
+}
+
 .not-img-content {
-  @apply flex flex-col justify-evenly h-full bg-gradient-to-br from-green-400 to-cyan-500;
+  @apply flex flex-col justify-evenly h-full w-full bg-gradient-to-br from-green-400 to-cyan-500;
   .date {
     @apply text-white text-opacity-80;
   }
