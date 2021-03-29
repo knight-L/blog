@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-01-25 21:28:15
  * @LastEditors: Knight
- * @LastEditTime: 2021-03-26 17:48:41
+ * @LastEditTime: 2021-03-29 15:42:34
 -->
 <template>
   <div class="grid grid-cols-3 gap-6 xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 xxl:grid-cols-3">
@@ -12,8 +12,8 @@
          v-for="(item,index) in data"
          :key="item.id"
          :class="{'lg:flex lg:col-span-2':index+1&2}">
-      <img class="w-full rounded-t-lg object-cover"
-           :class="[index+1&2 ? 'h-full order-last flex-1' : 'h-48']"
+      <img class="object-cover"
+           :class="[index+1&2 ? 'h-full w-6/12 order-last' : 'h-48 w-full rounded-t-lg']"
            alt="Card Title Img"
            :src="placeholder"
            v-if="item.img"
@@ -21,7 +21,7 @@
            @load="imgLoad"
            @error="imgError">
       <div class="p-4"
-           :class="[!!item.img ? index+1&2 ? 'img-content flex-1': 'def-content' : 'not-img-content']">
+           :class="[!!item.img ? index+1&2 ? 'img-content  w-6/12': 'def-content' : 'not-img-content']">
         <div class="text-xs font-semibold tracking-wide leading-7 date">
           {{item.time}}
         </div>
@@ -72,6 +72,7 @@ export default defineComponent({
 
     function imgLoad(event: Event) {
       const img = event.target as HTMLImageElement;
+      // img.className.includes("anim_fade") && img.classList.remove("anim_fade");
       img.classList.add("anim_fade");
       img.onload = null;
     }
