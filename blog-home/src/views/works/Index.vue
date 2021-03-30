@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-01-27 12:40:21
  * @LastEditors: Knight
- * @LastEditTime: 2021-03-23 22:12:43
+ * @LastEditTime: 2021-03-30 16:26:52
 -->
 <template>
   <div class="flex items-center justify-center h-screen">
@@ -17,7 +17,12 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-export default defineComponent({});
+export default defineComponent({
+  name: "Works",
+  setup() {
+    return {};
+  },
+});
 </script>
 <style lang="scss" scoped>
 </style>
