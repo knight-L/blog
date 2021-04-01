@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2020-12-25 22:42:21
  * @LastEditors: Knight
- * @LastEditTime: 2021-03-30 16:05:12
+ * @LastEditTime: 2021-04-01 21:05:44
 -->
 <template>
   <div>
@@ -65,7 +65,7 @@ export default defineComponent({
   setup() {
     window.addEventListener(
       "scroll",
-      throttle((ev: Event) => {
+      throttle(() => {
         const scrollTop =
           window.pageYOffset ||
           document.documentElement.scrollTop ||
@@ -82,6 +82,7 @@ export default defineComponent({
     }
 
     function backtop(): void {
+      navbarSticky.value = false;
       document.documentElement.scroll({
         top: 0,
         behavior: "smooth",
