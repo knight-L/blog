@@ -4,15 +4,15 @@
  * @Author: Knight
  * @Date: 2021-04-01 21:37:41
  * @LastEditors: Knight
- * @LastEditTime: 2021-04-02 17:18:29
+ * @LastEditTime: 2021-04-02 17:48:34
 -->
 <template>
   <div @click="focusNewTag()">
     <span v-for="(tag, index) in innerTags"
           :key="index"
-          :style="randomRgbaColor"
+          :style="tag.color"
           class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full mr-1">
-      {{ tag }}
+      {{ tag.value }}
     </span>
     <input v-if="!isLimit"
            ref="inputTag"
@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref } from "vue";
+import { defineComponent, computed, reactive, ref } from "vue";
 
 export default defineComponent({
   name: "InputTag",
@@ -57,20 +57,27 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     let newTag = ref("");
-    let innerTags = ref([...props.value]);
+    let innerTags = reactive(
+      props.value.map((value) => {
+        return {
+          color: randomRgbaColor(),
+          value,
+        };
+      })
+    );
     const inputTag = ref({});
 
     const isLimit = computed((): boolean => {
-      return props.limit > 0 && Number(props.limit) === innerTags.value.length;
+      return props.limit > 0 && Number(props.limit) === innerTags.length;
     });
 
-    const randomRgbaColor = computed((): string => {
+    function randomRgbaColor(): string {
       //随机生成RGBA颜色
       const r = Math.floor(Math.random() * 256); //随机生成256以内r值
       const g = Math.floor(Math.random() * 256); //随机生成256以内g值
       const b = Math.floor(Math.random() * 256); //随机生成256以内b值
       return `background-color:rgb(${r},${g},${b},0.3);color:rgb(${r},${g},${b},0.8);`; //返回rgba(r,g,b,a)格式颜色
-    });
+    }
 
     async function addNew(e: KeyboardEvent | FocusEvent): Promise<void> {
       const condition = [
@@ -85,12 +92,12 @@ export default defineComponent({
         return;
       }
 
-      if (innerTags.value.includes(newTag.value)) {
+      if (innerTags.map(({ value }) => value).includes(newTag.value)) {
         newTag.value = "";
         return;
       }
 
-      innerTags.value.push(newTag.value);
+      innerTags.push({ color: randomRgbaColor(), value: newTag.value });
       newTag.value = "";
       tagChange();
       e && e.preventDefault();
@@ -102,19 +109,20 @@ export default defineComponent({
     }
 
     function remove(index: number): void {
-      innerTags.value.splice(index, 1);
+      innerTags.splice(index, 1);
       tagChange();
     }
 
     function removeLastTag(): void {
       if (newTag.value) return;
-      innerTags.value.pop();
+      innerTags.pop();
       tagChange();
     }
 
     function tagChange(): void {
-      emit("update:tags", innerTags);
-      emit("input", innerTags);
+      const values = innerTags.map(({ value }) => value);
+      emit("update:tags", values);
+      emit("input", values);
     }
 
     return {
@@ -124,7 +132,6 @@ export default defineComponent({
       removeLastTag,
       tagChange,
       isLimit,
-      randomRgbaColor,
       inputTag,
       newTag,
       innerTags,
