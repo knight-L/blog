@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-03-22 23:25:09
  * @LastEditors: Knight
- * @LastEditTime: 2021-04-02 17:51:09
+ * @LastEditTime: 2021-04-02 17:56:06
 -->
 <template>
   <div class="relative mb-10 xs:px-6">
@@ -33,7 +33,7 @@ export default defineComponent({
     InputTag,
   },
   setup() {
-    let tags = ref(["Vue", "Angular"]);
+    let tags = ref(["Vue", "Angular", "Js", "Typescript", "WebPack"]);
 
     return {
       tags,
