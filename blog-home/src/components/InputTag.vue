@@ -4,7 +4,7 @@
  * @Author: Knight
  * @Date: 2021-04-01 21:37:41
  * @LastEditors: Knight
- * @LastEditTime: 2021-04-02 17:48:34
+ * @LastEditTime: 2021-04-04 22:12:56
 -->
 <template>
   <div @click="focusNewTag()">
@@ -74,8 +74,8 @@ export default defineComponent({
     function randomRgbaColor(): string {
       //随机生成RGBA颜色
       const r = Math.floor(Math.random() * 256); //随机生成256以内r值
-      const g = Math.floor(Math.random() * 256); //随机生成256以内g值
-      const b = Math.floor(Math.random() * 256); //随机生成256以内b值
+      const g = Math.floor(Math.random() * 200); //随机生成200以内g值
+      const b = Math.floor(Math.random() * 200); //随机生成200以内b值
       return `background-color:rgb(${r},${g},${b},0.3);color:rgb(${r},${g},${b},0.8);`; //返回rgba(r,g,b,a)格式颜色
     }
 
